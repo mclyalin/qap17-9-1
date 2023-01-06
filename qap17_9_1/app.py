@@ -1,13 +1,22 @@
-from utils import sort, binary_search
+from utils import validate, sort, binary_search
+from extensions import UserInputException
 
-str = input('Введите последовательность целых чисел через пробел:\n')
-num = int(input('Введите любое целое число: '))
+user_str = input('Введите последовательность целых чисел через пробел: ')
+user_num = input('Введите любое целое число: ')
 
-items = [int(item) for item in str.split(' ')]
-sorted = sort(items)
-index = binary_search(sorted, num, 0, len(sorted) - 1)
-
-if not index:
-  print('Искомый индекс не найден.')
+try:
+  items, num = validate(user_str, user_num)
+except UserInputException as e:
+  print(f'Ошибка ввода.\n{e}')
 else:
-  print(f'Искомый индекс равен: {index}')
+  sorted = sort(items)
+  index = binary_search(sorted, num, 0, len(sorted) - 1)
+
+  if not index:
+    print('Искомый индекс не найден.')
+  else:
+    print(f'Искомый индекс равен: {index}')
+
+# 1 2 d 4 56 78
+# 23 -45 43 0.5 34
+# 1 2 3 -4 5 7 54
