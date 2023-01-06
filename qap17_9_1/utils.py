@@ -1,3 +1,18 @@
+from extensions import UserInputException
+
+def validate(user_str, user_num):
+  try:
+    items = [int(item) for item in user_str.split(' ')]
+  except ValueError:
+    raise UserInputException(f'Невозможно обработать последовательность: {user_str}')
+
+  try:
+    num = int(user_num)
+  except ValueError:
+    raise UserInputException(f'Невозможно обработать число: {user_num}')
+
+  return items, num
+
 def sort(items):
   sorted = items.copy()
   for i in range(1, len(sorted)):
